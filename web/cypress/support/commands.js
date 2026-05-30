@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-real-events'
+
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
     cy.visit('http://localhost:3000')
@@ -34,4 +36,19 @@ Cypress.Commands.add('submitLoginForm', (email, senha) => {
     cy.get('#password').type(senha)
 
     cy.contains('button', 'Entrar').click()
+})
+
+Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
+    cy.contains(buttonName)
+        .should('be.visible')
+        .click()
+
+    cy.contains(pageTitle)
+        .should('be.visible')
+})
+
+// Helpers
+Cypress.Commands.add('login', () => {
+    cy.start()
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
 })
