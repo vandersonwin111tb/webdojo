@@ -1,5 +1,14 @@
 describe('Login', () => {
-  it('Deve logar com sucesso', () => {
+
+  function todayDate() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // months start at 0
+    const year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  it.only('Deve logar com sucesso', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
@@ -10,6 +19,12 @@ describe('Login', () => {
     cy.get('[data-cy="welcome-message"]')
       .should('be.visible')
       .and('have.text', 'Olá QA, esse é o seu Dojo para aprender Automação de Testes.')
+
+    cy.getCookie('login_date').should('exist')
+
+    cy.getCookie('login_date').should((cookie) => {
+      expect(cookie.value).to.eq(todayDate())
+    })
   })
 
   it('Não deve logar com senha inválida', () => {
