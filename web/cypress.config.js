@@ -7,6 +7,6 @@ module.exports = defineConfig({
     },
     experimentalStudio: true,
     video: true,
-    baseUrl: 'http://localhost:3000'
-  },
-});
+    baseUrl: 'http://localhost:3000',
+  }
+})

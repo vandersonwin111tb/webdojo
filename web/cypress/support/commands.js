@@ -30,7 +30,6 @@ import './actions/consultancy.actions'
 import { getTodayDate } from './utils'
 
 Cypress.Commands.add('start', () => {
-    cy.viewport(1440, 900)
     cy.visit('/')
 })
 

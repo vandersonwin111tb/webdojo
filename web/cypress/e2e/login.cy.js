@@ -1,7 +1,6 @@
 import { getTodayDate } from "../support/utils"
 
 describe('Login', () => {
-
   it('Deve logar com sucesso', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
