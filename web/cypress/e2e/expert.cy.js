@@ -23,7 +23,7 @@ describe('expert', () => {
 
     })
 
-    it.only('Não deve logar com senha inválida', () => {
+    it('Não deve logar com senha inválida', () => {
         cy.submitLoginForm('papito@webdojo.com', 'katana321')
 
         // cy.wait(2500)
@@ -44,5 +44,16 @@ describe('expert', () => {
 
         cy.get('@toast')
             .should('not.exist')
+    })
+
+    it.only('simulando a tecla TAB com cy.press', ()=> {
+        cy.log('todo')
+
+        cy.get('body').press('Tab')
+        cy.focused().should('have.attr', 'id', 'email')
+
+        cy.get('#email').press('Tab')
+        cy.focused().should('have.attr', 'id', 'password')
+
     })
 })
