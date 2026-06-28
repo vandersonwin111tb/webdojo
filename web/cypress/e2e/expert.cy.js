@@ -1,16 +1,16 @@
-describe('expert', ()=> {
-    beforeEach(()=>{
+describe('expert', () => {
+    beforeEach(() => {
         cy.start()
     })
 
-    it('Deve manipular os atributos de elementos do HTML', ()=> {
+    it('Deve manipular os atributos de elementos do HTML', () => {
         cy.log('todo')
 
         cy.get('#email').invoke('val', 'papito@teste.com.br')
 
         // cy.get('#password').invoke('attr', 'type', 'text')
         // cy.get('#password').invoke('removeAttr', 'class')
-            // .type('senha123')
+        // .type('senha123')
 
         cy.get('#password').invoke('attr', 'name', 'senha')
         cy.contains('button', 'Entrar')
@@ -21,5 +21,20 @@ describe('expert', ()=> {
             .invoke('show')
             .should('be.visible')
 
+    })
+
+    it.only('Não deve logar com senha inválida', () => {
+        cy.submitLoginForm('papito@webdojo.com', 'katana321')
+
+        // cy.wait(2500)
+
+        // cy.document().then((doc) => {
+        //     cy.writeFile('cypress/downloads/page.html', doc.documentElement.outerHTML)
+        // })
+
+        cy.get('[data-sonner-toaster=true]')
+            .should('be.visible')
+            .find('.title')
+            .should('have.text', 'Acesso negado! Tente novamente.')
     })
 })
