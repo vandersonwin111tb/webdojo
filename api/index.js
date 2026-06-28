@@ -81,6 +81,7 @@ app.post('/api/users/register', async (req, res) => {
     })
   }
 })
+
 app.get('/api/users', async (req, res) => {
   try {
     const users = await prisma.user.findMany({
@@ -95,6 +96,42 @@ app.get('/api/users', async (req, res) => {
     res.status(200).json(users)
   } catch (error) {
     res.status(500).json({ error: 'Error fetching users.' })
+  }
+})
+
+app.put('/api/users/:id', async (req, res) => {
+  const { id } = req.params
+  const { name, email, password } = req.body
+
+  if (!name) {
+    return res.status(400).json({
+      error: 'The "name" field is required.'
+    })
+  }
+
+  if (!email) {
+    return res.status(400).json({
+      error: 'The "email" field is required.'
+    })
+  }
+
+  if (!password) {
+    return res.status(400).json({
+      error: 'The "password" field is required.'
+    })
+  }
+
+  try {
+    await prisma.user.update({
+      where: { id: Number(id) },
+      data: {
+        name, email, password
+      }
+    })
+
+    res.status(204).end()
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating user :(' })
   }
 })
 
