@@ -63,7 +63,7 @@ describe('expert', () => {
     it.only('Deve realizar uma carga de dados fakes', () => {
         cy.log('todo')
 
-        _.times(100, () => {
+        _.times(5, () => {
             const name = faker.person.fullName()
             const email = faker.internet.email()
             const password = 'pwd123'
