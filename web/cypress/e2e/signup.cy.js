@@ -2,12 +2,12 @@ describe('Cadastro', () => {
     beforeEach(() => {
         cy.goToSignup()
 
-        // cy.intercept('POST', '/api/users/register', {
-        //     statusCode: 201,
-        //     body: {
-        //         message: 'Usuário cadastrado com sucesso'
-        //     }
-        // }).as('postSignup')
+        cy.intercept('POST', '/api/users/register', {
+            statusCode: 201,
+            body: {
+                message: 'Usuário cadastrado com sucesso'
+            }
+        }).as('postSignup')
     })
 
     it('Deve cadastrar um novo usuário', () => {
