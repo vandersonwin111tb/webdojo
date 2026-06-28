@@ -1,12 +1,12 @@
 meta {
-  name: Update a user
+  name: Delete a user
   type: http
-  seq: 5
+  seq: 6
 }
 
-put {
+delete {
   url: http://localhost:3333/api/users/282
-  body: json
+  body: none
   auth: inherit
 }
 
