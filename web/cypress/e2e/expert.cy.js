@@ -4,7 +4,6 @@ describe('expert', () => {
     })
 
     it('Deve manipular os atributos de elementos do HTML', () => {
-        cy.log('todo')
 
         cy.get('#email').invoke('val', 'papito@teste.com.br')
 
@@ -23,8 +22,10 @@ describe('expert', () => {
 
     })
 
-    it('Não deve logar com senha inválida', () => {
-        cy.submitLoginForm('papito@webdojo.com', 'katana321')
+    it.only('Não deve logar com senha inválida', () => {
+        // cy.submitLoginForm('papito@webdojo.com', 'katana321')
+        cy.get('#email').type('papito@webdojo.com')
+        cy.get('#password').type('aadasds{Enter}')
 
         // cy.wait(2500)
 
@@ -46,7 +47,7 @@ describe('expert', () => {
             .should('not.exist')
     })
 
-    it.only('simulando a tecla TAB com cy.press', ()=> {
+    it('simulando a tecla TAB com cy.press', ()=> {
         cy.log('todo')
 
         cy.get('body').press('Tab')
@@ -54,6 +55,5 @@ describe('expert', () => {
 
         cy.get('#email').press('Tab')
         cy.focused().should('have.attr', 'id', 'password')
-
     })
 })
